@@ -1,2 +1,7 @@
-
-        
+<a href="#" class="list-group-item-action border d-flex align-items-center justify-content-between p-3" (click)="rSelected()">
+    <div>
+        <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
+        <p class="list-group-item-text">{{ recipe.description }}</p>
+    </div>
+    <span><img src="{{ recipe.image }}" alt="" class="img-responsive" Style="max-height: 70px;"></span>
+</a>

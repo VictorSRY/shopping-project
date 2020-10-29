@@ -5,15 +5,7 @@
 </div>
 <hr>    
 <div class="row">
-    <div class="col-12 list-group" *ngFor="let recipe of recipes">
-        <a href="#" class="list-group-item-action border clearfix d-flex align-items-center justify-content-between p-3">
-            <div>
-                <h4 class="list-group-item-heading">{{ recipe.name }}</h4>
-                <p class="list-group-item-text">{{ recipe.description }}</p>
-            </div>
-            <span><img src="{{ recipe.image }}" alt="" class="img-responsive" Style="max-height: 50px;"></span>
-        </a>
-
-        <app-recipe-item ></app-recipe-item>
+    <div class="col-12 list-group">
+        <app-recipe-item *ngFor="let recipe of recipes" [recipe] ="recipe" (selected) ="pasSelected(recipe)"></app-recipe-item>
     </div>
 </div>
