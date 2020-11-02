@@ -1,7 +1,7 @@
 <p>recipes works!</p>
 <div class="row">
     <div class="col-5">
-    <app-recipe-list (pasSelect)="selectedR = $event"></app-recipe-list>    
+    <app-recipe-list></app-recipe-list>    
     </div>
     <div class="col-7">
         <app-recipe-detail *ngIf="selectedR; else notSelected" [selectedR]="selectedR" ></app-recipe-detail>

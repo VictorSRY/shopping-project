@@ -10,13 +10,13 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <div class="btn-group">
-        <button class="btn btn-primary dropdown-toggle">Mange<span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li class="dropdown-item"><a href="#">shopping list</a></li>
-            <li class="dropdown-item"><a href="#">edit Recipe</a></li>
-            <li class="dropdown-item"><a href="#">Delete Recipe</a></li>
-        </ul>
+        <div class="btn-group " [appDropdown]="'show'">
+            <button class="btn btn-primary dropdown-toggle">Mange<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item"><a href="#" (click)="addToShoppingList()">add to shopping list</a></li>
+                <li class="dropdown-item"><a href="#">edit Recipe</a></li>
+                <li class="dropdown-item"><a href="#">Delete Recipe</a></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -27,6 +27,15 @@
 </div>
 <div class="row">
     <div class="col-12">
-        Ingredients
+        <strong>Ingredients:</strong>
+        <ul class="list-group">
+            <a 
+            class="list-group-item p-2" 
+            style="cursor: pointer;"
+            *ngFor="let item of selectedR.ingredients"
+            >
+            {{ item.name }} : {{ item.amount }} unite
+            </a>
+        </ul>
     </div>
 </div>

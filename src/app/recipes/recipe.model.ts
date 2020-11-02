@@ -1,8 +1,11 @@
+import { Ingredient } from '../shared/ingredient.model'
+
 export class Recipe{
-    public name: String
-    public description: String
-    public image: String
-    constructor(name: String,desc: String,image: String){
+    public name: string
+    public description: string
+    public image: string
+    
+    constructor(name: string,desc: string,image: string, public ingredients:Ingredient[]){
         this.name=name
         this.description=desc
         this.image=image
