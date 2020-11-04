@@ -14,8 +14,8 @@ export class AppComponent {
 
   constructor(private route:Router){ }
 
-  setview(view:string){
+  /*setview(view:string){
     this.viewMode=view
     this.route.navigate([view])
-  }
+  }*/
 }
