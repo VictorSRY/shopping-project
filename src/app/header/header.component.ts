@@ -1,4 +1,3 @@
-import { componentFactoryName } from '@angular/compiler';
 import { Component, EventEmitter, Output } from "@angular/core"
 @Component({
     selector : "app-header",
