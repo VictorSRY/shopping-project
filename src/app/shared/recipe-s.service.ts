@@ -6,7 +6,7 @@ import { Ingredient } from './ingredient.model';
   providedIn: 'root'
 })
 export class RecipeSService {
-  recipes:Recipe[] = [new Recipe(0,'iLu', "i l U", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]),new Recipe(1,'iLu2', "i l U 2", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]) ] 
+  recipes:Recipe[] = [new Recipe('iLu', "i l U", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]),new Recipe('iLu2', "i l U 2", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]) ] 
   
   recipeSlected = new EventEmitter<Recipe>();
 
@@ -49,7 +49,13 @@ export class RecipeSService {
   }
 
   updateRecipe(index:number, recipe:Recipe){
-    this.recipes[index]=recipe
+    console.log('updating recipe id:',index,"to",recipe)
+    if(index===-1){
+      this.recipes.push(recipe)
+    }else{
+      this.recipes[index]=recipe
+    }
+    console.log(this.recipes[index])
   }
 
   recipeIndexOf(name:string){

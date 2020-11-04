@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
        <div class="col-12 btn-group">
-        <button class="btn btn-success" type="submit" (click)="update()" >Save</button>
+        <button class="btn btn-success" type="submit" (click)="updateRecipe()" >Save</button>
         <button class="btn btn-danger">Delete</button>
         <button class="btn btn-primary">Clear</button>
        </div>
@@ -10,7 +10,13 @@
 <hr>
 <div class="row">
     <div class="col-12">
-        <img [src]=" selectedR.image " alt="" class="img-fluid">
+        <p><small><strong>Image Url:</strong></small></p>
+        <input type="text" class="form-control" [(ngModel)]="image">
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <img [src]=" image " alt="image" class="img-fluid">
     </div>
 </div>
 <div class="row">
@@ -45,7 +51,7 @@
             <a 
             class="list-group-item p-2" 
             style="cursor: pointer;"
-            *ngFor="let item of selectedR.ingredients"
+            *ngFor="let item of ingredients"
             >
             {{ item.name }} : {{ item.amount }} unite
             </a>

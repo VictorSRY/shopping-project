@@ -2,10 +2,10 @@
   <div class="row d-flex justify-content-center">
     <h1 class="flex">hello <span class="text-danger"> olla</span></h1>
   </div>
-  <app-header (view)="setview($event)" ></app-header>
+  <app-header ></app-header>
   <div class="row-12 d-flex btn-group">
-    <button class="btn btn-success" [ngClass]="{'active':viewMode === 'recipe'}" (click)="setview('recipe')">Recipes</button>
-    <button class="btn btn-success" [ngClass]="{'active':viewMode === 'shoppingList'}" (click)="setview('shopping-list')">Shopping List</button>
+    <button class="btn btn-success" routerLinkActive="active" [routerLink]="['recipe']">Recipes</button>
+    <button class="btn btn-success" routerLinkActive="active" [routerLink]="['Shopping-List']">Shopping List</button>
   </div>
   <router-outlet></router-outlet>
   <!--<app-recipes *ngIf=" viewMode === 'recipe' " ></app-recipes>
