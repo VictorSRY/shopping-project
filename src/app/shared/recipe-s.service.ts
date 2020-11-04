@@ -48,10 +48,7 @@ export class RecipeSService {
     this.recipes.splice(index,1)
   }
 
-  updateRecipe(recipe:Recipe, index:number){
-    if(index===-1){
-      index = this.recipeIndexOf(recipe.name)
-    }
+  updateRecipe(index:number, recipe:Recipe){
     this.recipes[index]=recipe
   }
 
