@@ -1,1 +1,42 @@
-<p>recipe-edit works!</p>
+<div class="row">
+    <div class="col-12">
+        <img [src]=" selectedR.image " alt="" class="img-fluid">
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <input type="text" class="h1 m-1" [(ngModel)]="selectedR.name" >
+    </div>
+</div>
+<!--
+<div class="row">
+    <div class="col-12">
+        <div class="btn-group " [appDropdown]="'show'">
+            <button class="btn btn-primary dropdown-toggle">Mange<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item"><a (click)="addToShoppingList()">add to shopping list</a></li>
+                <li class="dropdown-item"><a [routerLink]="['../recipe-edit']" [queryParamsHandling]="'preserve'">edit Recipe</a></li>
+                <li class="dropdown-item"><a href="#">Delete Recipe</a></li>
+            </ul>
+        </div>
+    </div>
+</div> -->
+<div class="row">
+    <div class="col-12">
+        {{ selectedR.description }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <strong>Ingredients:</strong>
+        <ul class="list-group">
+            <a 
+            class="list-group-item p-2" 
+            style="cursor: pointer;"
+            *ngFor="let item of selectedR.ingredients"
+            >
+            {{ item.name }} : {{ item.amount }} unite
+            </a>
+        </ul>
+    </div>
+</div>

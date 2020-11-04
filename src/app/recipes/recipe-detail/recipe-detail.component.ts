@@ -19,11 +19,11 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((param:Params)=>{
       console.log(param['recipeId'])
-      this.selectedR = this.recipeS.getRecipeByName(param['recipeId'])
+      this.selectedR = this.recipeS.getRecipe(+param['recipeId'])
     })
   }
   addToShoppingList(){
-    /* this.shoppingS.addIngredients(this.selectedR.ingredients) */
+    this.shoppingS.addIngredients(this.selectedR.ingredients) 
     
   }
 
