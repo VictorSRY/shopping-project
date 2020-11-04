@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeSService } from 'src/app/shared/recipe-s.service';
 import { Recipe } from '../../recipe.model';
 
@@ -15,8 +16,8 @@ export class RecipeItemComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  rSelected(){
+  /* rSelected(){
     this.recipeS.recipeSlected.emit(this.recipe)
-  }
+  }*/
 
 }

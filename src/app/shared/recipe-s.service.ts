@@ -16,6 +16,15 @@ export class RecipeSService {
     console.log("getselected")
     return this.recipes[index]
   }*/
+  
+  getRecipeByName(name:string){
+    var ans:Recipe = this.recipes.find( (recipe:Recipe)=>{
+          return recipe.name===name
+          }
+        )
+    return ans
+  }
+
   getRecipes(){
     return this.recipes.slice()
   }

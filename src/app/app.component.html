@@ -5,8 +5,9 @@
   <app-header (view)="setview($event)" ></app-header>
   <div class="row-12 d-flex btn-group">
     <button class="btn btn-success" [ngClass]="{'active':viewMode === 'recipe'}" (click)="setview('recipe')">Recipes</button>
-    <button class="btn btn-success" [ngClass]="{'active':viewMode === 'shoppingList'}" (click)="setview('shoppingList')">Shopping List</button>
+    <button class="btn btn-success" [ngClass]="{'active':viewMode === 'shoppingList'}" (click)="setview('shopping-list')">Shopping List</button>
   </div>
-  <app-recipes *ngIf=" viewMode === 'recipe' " ></app-recipes>
-  <app-shopping-list *ngIf=" viewMode === 'shoppingList' " ></app-shopping-list>
+  <router-outlet></router-outlet>
+  <!--<app-recipes *ngIf=" viewMode === 'recipe' " ></app-recipes>
+  <app-shopping-list *ngIf=" viewMode === 'shoppingList' " ></app-shopping-list>-->
 </div>
