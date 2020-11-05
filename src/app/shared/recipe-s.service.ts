@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Recipe } from '../recipes/recipe.model';
 import { Ingredient } from './ingredient.model';
 
@@ -6,8 +7,10 @@ import { Ingredient } from './ingredient.model';
   providedIn: 'root'
 })
 export class RecipeSService {
-  recipes:Recipe[] = [new Recipe('iLu', "i l U", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]),new Recipe('iLu2', "i l U 2", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]) ] 
+  recipes:Recipe[] = [new Recipe('Rabbit', "baby rabbits", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]),new Recipe('Rabbit 2', "baby rabbits 2", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',20)]) ] 
   
+  updateRecipes = new Subject<Recipe[]>()
+
   recipeSlected = new EventEmitter<Recipe>();
 
   constructor() { }
@@ -33,12 +36,9 @@ export class RecipeSService {
     return this.recipes.slice()
   }
 
-  getNewRecipeId(){
-    return this.recipes.length
-  }
-
   addRecipe(recipe:Recipe){
     this.recipes.push(recipe)
+    this.updateRecipes.next(this.recipes.slice())
   }
 
   removeRecipe(index:number= -1 ,name:string=""){
@@ -46,6 +46,7 @@ export class RecipeSService {
       index = this.recipeIndexOf(name)      
     }
     this.recipes.splice(index,1)
+    this.updateRecipes.next(this.recipes.slice())
   }
 
   updateRecipe(index:number, recipe:Recipe){
@@ -56,6 +57,7 @@ export class RecipeSService {
       this.recipes[index]=recipe
     }
     console.log(this.recipes[index])
+    this.updateRecipes.next(this.recipes.slice())
   }
 
   recipeIndexOf(name:string){
@@ -66,6 +68,4 @@ export class RecipeSService {
     })
     return -1
   }
-
-
 }
