@@ -6,12 +6,17 @@ import { Ingredient } from './ingredient.model';
   providedIn: 'root'
 })
 export class ShoppingSService {
-  ingredients:Ingredient[] = [new Ingredient('Apple',4),new Ingredient('Grape',100)]
 
+  ingredients:Ingredient[] = [new Ingredient('Apple',4),new Ingredient('Grape',100)]
   updateIngerdients = new Subject<Ingredient[]>()
   removeMode=new Subject<boolean>()
+  editMode=new Subject<number>()
 
   constructor() { }
+
+  getIngerdient(index){
+    return this.ingredients.slice()[index]
+  }
 
   getIngerdients(){
     return this.ingredients.slice()
@@ -31,22 +36,23 @@ export class ShoppingSService {
     console.log("remove ingredient id:",index)
     this.ingredients.splice(index,1)
     this.updateIngerdients.next(this.ingredients.slice())
-
   }
 
-  updateIngredient(ingredient:Ingredient, index:number){
-    if(index===-1){
-      index = this.ingredientIndexOf(ingredient.name)
-    }
+  updateIngredient(index:number,ingredient:Ingredient){
     this.ingredients[index]=ingredient
   }
 
   ingredientIndexOf(name:string){
+
     this.ingredients.forEach( (ingredient,index) =>{
+
       if(ingredient.name===name){
         return index
       }
+
     })
     return -1
+
   }
+
 }

@@ -11,6 +11,7 @@ import { ShoppingSService } from '../shared/shopping-s.service';
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   
+  private subscription:Subscription
   public ingredients:Ingredient[]
   private shoppingSubscription:Subscription
   public index:number
@@ -19,21 +20,30 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   constructor(private shoppingS:ShoppingSService,private recipeS:RecipeSService){ }
 
   ngOnInit(): void {
-    this.shoppingS.removeMode.subscribe(value=>{
+    // to remove or active "X"
+    this.subscription = this.shoppingS.removeMode.subscribe(value=>{
       this.removeMode=value
       console.log(this.removeMode)
     })
+
+    // To get ingredients and live update
     this.ingredients= this.shoppingS.getIngerdients()
     this.shoppingSubscription = this.shoppingS.updateIngerdients.subscribe( (ingredients:Ingredient[]) => {
       this.ingredients=ingredients
     })
   }
-  ngOnDestroy(){
-    this.shoppingSubscription.unsubscribe()
-  }
+
   remove(index){
     if(this.removeMode){
       this.shoppingS.removeIngredient(index)
     }
+  }
+
+  edit(index){
+    this.shoppingS.editMode.next(index)
+  }
+    ngOnDestroy(){
+    this.subscription.unsubscribe()
+    this.shoppingSubscription.unsubscribe()
   }
 }

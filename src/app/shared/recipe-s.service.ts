@@ -7,10 +7,9 @@ import { Ingredient } from './ingredient.model';
   providedIn: 'root'
 })
 export class RecipeSService {
-  recipes:Recipe[] = [new Recipe('Rabbit', "baby rabbits", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',10)]),new Recipe('Rabbit 2', "baby rabbits 2", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg",[new Ingredient('apple',20)]) ] 
-  
-  updateRecipes = new Subject<Recipe[]>()
 
+  recipes: Recipe[] = [new Recipe('Rabbit', "baby rabbits", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg", [new Ingredient('apple', 10)]), new Recipe('Rabbit 2', "baby rabbits 2", "https://i.ytimg.com/vi/vNhVFle8yLg/maxresdefault.jpg", [new Ingredient('apple', 20)])]
+  updateRecipes = new Subject<Recipe[]>()
   recipeSlected = new EventEmitter<Recipe>();
 
   constructor() { }
@@ -19,53 +18,50 @@ export class RecipeSService {
     console.log("getselected")
     return this.recipes[index]
   }*/
-  
-  getRecipeByName(name:string){
-    var ans:Recipe = this.recipes.find( (recipe:Recipe)=>{
-          return recipe.name===name
-          }
-        )
+
+  getRecipeByName(name: string) {
+    var ans: Recipe = this.recipes.find( (recipe: Recipe) => {
+      return recipe.name === name
+    })
     return ans
   }
-  
-  getRecipe(index:number){
+
+  getRecipe(index: number) {
     return this.recipes[index]
   }
 
-  getRecipes(){
+  getRecipes() {
     return this.recipes.slice()
   }
 
-  addRecipe(recipe:Recipe){
+  addRecipe(recipe: Recipe) {
     this.recipes.push(recipe)
     this.updateRecipes.next(this.recipes.slice())
   }
 
-  removeRecipe(index:number= -1 ,name:string=""){
-    if (index === -1){
-      index = this.recipeIndexOf(name)      
-    }
-    this.recipes.splice(index,1)
+  removeRecipe(index: number) {
+    this.recipes.splice(index, 1)
     this.updateRecipes.next(this.recipes.slice())
   }
 
-  updateRecipe(index:number, recipe:Recipe){
-    console.log('updating recipe id:',index,"to",recipe)
-    if(index===-1){
+  updateRecipe(index: number, recipe: Recipe) {
+    console.log('updating recipe id:', index, "to", recipe)
+    if (index === -1) {
       this.recipes.push(recipe)
-    }else{
-      this.recipes[index]=recipe
+    } else {
+      this.recipes[index] = recipe
     }
     console.log(this.recipes[index])
     this.updateRecipes.next(this.recipes.slice())
   }
 
-  recipeIndexOf(name:string){
-    this.recipes.forEach( (recipe,index) =>{
-      if(recipe.name===name){
+  recipeIndexOf(name: string) {
+    this.recipes.forEach((recipe, index) => {
+      if (recipe.name === name) {
         return index
       }
     })
     return -1
   }
+
 }

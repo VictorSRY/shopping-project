@@ -25,6 +25,4 @@ const approutes:Routes=[
     exports:[RouterModule]
 })
 
-export class AppRouting{
-
-}
+export class AppRouting { }

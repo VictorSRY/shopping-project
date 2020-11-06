@@ -14,9 +14,10 @@
             <div class="row">
                 <div class="col-12">
                    <div class="col-4 btn-group">
-                    <button class="btn btn-success" type="submit" [disabled]="ingredientsForm.valid">add</button>
-                    <button class="btn btn-danger" type="button" (click)="remove()">Delete</button>
-                    <button class="btn btn-primary" type="button">Clear</button>
+                    <button class="btn btn-success" type="submit" [disabled]="!ingredientsForm.valid" *ngIf="editId===null">add</button>
+                    <button class="btn btn-success" type="button" (click)="update()" [disabled]="!ingredientsForm.valid" *ngIf="editId!==null">update</button>
+                    <button class="btn btn-danger" type="button" (click)="edit()">edit list</button>
+                    <button class="btn btn-primary" type="button" (click)="reSet()" >Clear</button>
                    </div>
                 </div>
             </div>

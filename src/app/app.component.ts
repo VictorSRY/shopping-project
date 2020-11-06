@@ -10,8 +10,9 @@ import { ShoppingSService } from './shared/shopping-s.service';
   providers: [ ShoppingSService , RecipeSService ]
 })
 export class AppComponent {
+  
   viewMode='recipe'
-
+  
   constructor(private route:Router){ }
 
   /*setview(view:string){
