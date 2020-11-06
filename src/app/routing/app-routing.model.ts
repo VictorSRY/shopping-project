@@ -5,6 +5,7 @@ import { RecipeDetailComponent } from '../recipes/recipe-detail/recipe-detail.co
 import { RecipeEditComponent } from '../recipes/recipe-edit/recipe-edit.component';
 import { RecipesComponent } from '../recipes/recipes.component';
 import { ShoppingListComponent } from '../shopping-list/shopping-list.component';
+import { AppHttpResolverService } from './app-http-resolver.service';
 
 const approutes:Routes=[
     {path:'',redirectTo:'/recipe',pathMatch:'full'},
@@ -15,8 +16,8 @@ const approutes:Routes=[
     {path:'recipe',component:RecipesComponent,children:[
         {path:'',component:NoRecipeComponent},
         {path:'new',component:RecipeEditComponent},
-        {path:':id',component:RecipeDetailComponent},
-        {path:':id/recipe-edit',component:RecipeEditComponent}
+        {path:':id',component:RecipeDetailComponent, resolve:[AppHttpResolverService] },
+        {path:':id/recipe-edit',component:RecipeEditComponent, resolve:[AppHttpResolverService] }
     ]},
 ]
 

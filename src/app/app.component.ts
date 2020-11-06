@@ -7,7 +7,6 @@ import { ShoppingSService } from './shared/shopping-s.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ ShoppingSService , RecipeSService ]
 })
 export class AppComponent {
   

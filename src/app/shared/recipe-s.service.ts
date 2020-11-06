@@ -42,6 +42,7 @@ export class RecipeSService {
   removeRecipe(index: number) {
     this.recipes.splice(index, 1)
     this.updateRecipes.next(this.recipes.slice())
+    console.log(this.recipes)
   }
 
   updateRecipe(index: number, recipe: Recipe) {
@@ -51,7 +52,12 @@ export class RecipeSService {
     } else {
       this.recipes[index] = recipe
     }
-    console.log(this.recipes[index])
+    this.updateRecipes.next(this.recipes.slice())
+  }
+
+  setRecipes(recipes) {
+    console.log(this.recipes)
+    this.recipes = recipes.slice()
     this.updateRecipes.next(this.recipes.slice())
   }
 

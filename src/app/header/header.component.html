@@ -16,10 +16,10 @@
       </ul>
       <ul class="navbar-nav float-right">
         <li class="dropdown " [appDropdown]="'show'">
-          <a href="#" class="nav-link dropdown-toggle" role="button">ilu</a>
+          <a class="nav-link dropdown-toggle" role="button">ilu</a>
           <ul class="dropdown-menu dropdown-menu-right">
-            <li class="dropdown-item"><a href="#">Save</a></li>
-            <li class="dropdown-item"><a href="#">Fetch</a></li>
+            <li class="dropdown-item"><a (click)="saveReciep()">Save</a></li>
+            <li class="dropdown-item"><a (click)="fetchData()">Fetch</a></li>
           </ul>
         </li>
       </ul>
