@@ -4,11 +4,15 @@
         <hr>
         <ul class="list-group">
             <a 
-            class="list-group-item" 
+            class="list-group-item d-flex justify-content-between" 
             style="cursor: pointer;"
-            *ngFor="let item of ingredients"
+            *ngFor="let item of ingredients; let i = index"
+            (click)="remove(i)"
             >
-            {{ item.name }} : {{ item.amount }} unite
+            <span>{{ item.name }} : {{ item.amount }} unite</span>
+            <button type="button" class="close" aria-label="Close" *ngIf="removeMode">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </a>
         </ul>
     </div>

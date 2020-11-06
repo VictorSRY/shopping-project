@@ -9,6 +9,7 @@ export class ShoppingSService {
   ingredients:Ingredient[] = [new Ingredient('Apple',4),new Ingredient('Grape',100)]
 
   updateIngerdients = new Subject<Ingredient[]>()
+  removeMode=new Subject<boolean>()
 
   constructor() { }
 
@@ -26,11 +27,11 @@ export class ShoppingSService {
     this.updateIngerdients.next(this.ingredients.slice())
   }
 
-  removeIngredient(index:number= -1, name:string){
-    if (index === -1){
-      index = this.ingredientIndexOf(name)      
-    }
+  removeIngredient(index?:number){
+    console.log("remove ingredient id:",index)
     this.ingredients.splice(index,1)
+    this.updateIngerdients.next(this.ingredients.slice())
+
   }
 
   updateIngredient(ingredient:Ingredient, index:number){

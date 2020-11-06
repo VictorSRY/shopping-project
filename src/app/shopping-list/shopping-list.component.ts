@@ -13,10 +13,16 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   
   public ingredients:Ingredient[]
   private shoppingSubscription:Subscription
+  public index:number
+  removeMode:boolean=false
   
   constructor(private shoppingS:ShoppingSService,private recipeS:RecipeSService){ }
 
   ngOnInit(): void {
+    this.shoppingS.removeMode.subscribe(value=>{
+      this.removeMode=value
+      console.log(this.removeMode)
+    })
     this.ingredients= this.shoppingS.getIngerdients()
     this.shoppingSubscription = this.shoppingS.updateIngerdients.subscribe( (ingredients:Ingredient[]) => {
       this.ingredients=ingredients
@@ -24,5 +30,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(){
     this.shoppingSubscription.unsubscribe()
+  }
+  remove(index){
+    if(this.removeMode){
+      this.shoppingS.removeIngredient(index)
+    }
   }
 }
