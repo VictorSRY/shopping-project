@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from '../auth/auth.component';
+import { AuthGuard } from '../auth/auth.guard';
 import { NoRecipeComponent } from '../recipes/no-recipe/no-recipe.component';
 import { RecipeDetailComponent } from '../recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from '../recipes/recipe-edit/recipe-edit.component';
@@ -8,12 +10,13 @@ import { ShoppingListComponent } from '../shopping-list/shopping-list.component'
 import { AppHttpResolverService } from './app-http-resolver.service';
 
 const approutes:Routes=[
+    {path:'auth',component:AuthComponent},
     {path:'',redirectTo:'/recipe',pathMatch:'full'},
     {path:'Shopping-List',component:ShoppingListComponent},
     {path:'shopping-list',redirectTo:'/Shopping-List'},
     {path:'Shopping-list',redirectTo:'/Shopping-List'},
     {path:'shoppinglist',redirectTo:'/Shopping-List'},
-    {path:'recipe',component:RecipesComponent,children:[
+    {path:'recipe',component:RecipesComponent,canActivate:[AuthGuard] ,children:[
         {path:'',component:NoRecipeComponent},
         {path:'new',component:RecipeEditComponent},
         {path:':id',component:RecipeDetailComponent, resolve:[AppHttpResolverService] },

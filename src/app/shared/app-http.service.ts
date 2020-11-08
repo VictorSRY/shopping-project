@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs/operators'
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { exhaustMap, map, take, tap } from 'rxjs/operators'
+import { AuthService } from '../auth/auth.service';
 import { Recipe } from '../recipes/recipe.model';
-import { Ingredient } from './ingredient.model';
 import { RecipeSService } from './recipe-s.service';
 
 @Injectable({
@@ -10,19 +11,43 @@ import { RecipeSService } from './recipe-s.service';
 })
 export class AppHttpService {
 
-  constructor(private http:HttpClient,private recipeS:RecipeSService) { }
+  private userSub: Subscription
 
-  storeRecipe(){
+  constructor(private http: HttpClient, private recipeS: RecipeSService, private userAuth: AuthService) { }
+
+  storeRecipe() {
     const recipes = this.recipeS.getRecipes()
-    this.http.put("https://angular-shoppingapp-project.firebaseio.com/recipe.json",recipes).subscribe(event=>{
-      console.log("Saved")
-    })
+    this.userAuth.user.pipe(take(1), exhaustMap(user => {
+      return this.http.put("https://angular-shoppingapp-project.firebaseio.com/recipe.json", recipes, { params: new HttpParams().set('auth', user.token) })
+    }))
+      .subscribe(event => {
+        console.log("Saved")
+      })
   }
 
-  fetchRecipe(){
+  fetchRecipe() {
+
     return this.http
-    .get<Recipe[]>("https://angular-shoppingapp-project.firebaseio.com/recipe.json")
-    .pipe( map( data => {
+      .get<Recipe[]>("https://angular-shoppingapp-project.firebaseio.com/recipe.json").pipe(map(data => {
+        return data.map(recipe => {
+          return { ...recipe, ingredients: recipe.ingredients ? recipe.ingredients : [] }
+        })
+      }),
+        tap(data => {
+          this.recipeS.setRecipes(data)
+          console.log("got Recipes")
+        })
+      )
+
+    /*
+
+    // withOut Interseptor
+
+    return this.userAuth.user.pipe( take(1), exhaustMap(user=>{
+      return this.http
+    .get<Recipe[]>("https://angular-shoppingapp-project.firebaseio.com/recipe.json",{params: new HttpParams().set("auth",user.token)})
+    }),
+    map( data => {
       return data.map((recipe)=>{
         return {...recipe, ingredients : recipe.ingredients ? recipe.ingredients : [] } 
       })
@@ -30,7 +55,7 @@ export class AppHttpService {
     tap( (data) =>{
       this.recipeS.setRecipes(data)
       console.log("got")
-    }))
+    }))*/
   }
 
 }

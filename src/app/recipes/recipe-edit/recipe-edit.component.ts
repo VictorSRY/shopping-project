@@ -63,7 +63,7 @@ export class RecipeEditComponent implements OnInit {
     console.log(this.name, this.description)
     //this.recipeS.updateRecipe(this.id, new Recipe(this.name, this.description, this.image, this.ingredients))
     this.recipeS.updateRecipe(this.id, this.recipeForm.value)
-    this.router.navigate(['../'], { relativeTo: this.route })
+    this.router.navigate(['../'], { relativeTo: this.route , queryParamsHandling:"preserve"})
   }
 
   private initForm() {
