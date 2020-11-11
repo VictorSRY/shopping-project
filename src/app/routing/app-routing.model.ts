@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const approutes:Routes=[
     {path:'',redirectTo:'/recipe',pathMatch:'full'},
-    {path:'recipe', loadChildren:'../recipes/recipes.module#RecipesModule'}
+    {path:'recipe', loadChildren:()=>import('../recipes/recipes.module').then(module => module.RecipesModule))}
 ]
 
 @NgModule({

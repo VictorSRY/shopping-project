@@ -37,5 +37,6 @@ const routes:Routes=[
         ReactiveFormsModule,
         SharedModule
     ],
+    exports:[RouterModule]
 })
 export class RecipesModule{ }
